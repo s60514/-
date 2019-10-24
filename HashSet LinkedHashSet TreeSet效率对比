@@ -1,0 +1,48 @@
+      /**
+         *  HashSet LinkedHashSet TreeSet效率对比
+         *  最近需要一个去重的有集合，简单对比了一下效率
+         HashSet共花费时间：121ms
+        LinkedHashSet共花费时间：75ms
+        TreeSet共花费时间：136ms
+        
+        
+         */
+         
+         public static void main(String[] args) {
+
+        Digester md5 = new Digester(DigestAlgorithm.MD5);
+//        String digestHex = md5.digestHex(i);//
+//        RandomUtil.randomInt(100);
+//        System.out.println(RandomUtil.randomInt(100));
+        //HashSet效率
+        HashSet hs = new HashSet();
+        long ks = System.currentTimeMillis();
+        for (int i=1;i<99999;i++)
+            hs.add(md5.digestHex(String.valueOf(RandomUtil.randomInt(33333))));
+        Iterator it = hs.iterator();
+        while (it.hasNext())
+            it.next();
+        long js = System.currentTimeMillis();
+        //LinkedHashSet效率
+        LinkedHashSet lh = new LinkedHashSet();
+        long ks1 = System.currentTimeMillis();
+        for (int i=1;i<99999;i++)
+            lh.add(md5.digestHex(String.valueOf(RandomUtil.randomInt(33333))));
+        Iterator it1 = lh.iterator();
+        while (it1.hasNext())
+            it1.next();
+        long js1 = System.currentTimeMillis();
+        //TreeSet效率
+        TreeSet ts = new TreeSet();
+        long ks2 = System.currentTimeMillis();
+        for (int i=1;i<99999;i++)
+            ts.add(md5.digestHex(String.valueOf(RandomUtil.randomInt(33333))));
+        Iterator it2 = ts.iterator();
+        while (it2.hasNext())
+            it2.next();
+        long js2 = System.currentTimeMillis();
+        System.out.println("HashSet共花费时间："+(js-ks)+"ms");
+        System.out.println("LinkedHashSet共花费时间："+(js1-ks1)+"ms");
+        System.out.println("TreeSet共花费时间："+(js2-ks2)+"ms");
+
+    }
